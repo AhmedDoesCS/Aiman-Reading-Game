@@ -1,7 +1,6 @@
 import React from 'react'
 
 function Game() {
-    const recognition = new SpeechRecognition();
 
     window.SpeechRecognition = window.SpeechRecognition
 
