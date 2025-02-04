@@ -1,6 +1,10 @@
 import React from 'react'
 
 function Game() {
+    const recognition = new SpeechRecognition();
+
+    window.SpeechRecognition = window.SpeechRecognition
+
   return <>
     <div className='w-[100%] h-[100vh] py-[10%] px-[6%] bg-cyan-100 '>
         <div className='w-[100%] h-[100%] [word-spacing:20px] text-wrap text-[35px]/15 font-[600] text-black/40 flex justify-center overflow-scroll'>
