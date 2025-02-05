@@ -3,18 +3,35 @@ import React from 'react'
 function Game() {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
-
+    recognition.lang = 'en';
+    recognition.interimResults = 'false';
+    recognition.continuous = 'true';
 
     function startButton() {
-        const startButton = document.getElementById("start");
         const textContent = document.getElementById("textContent");
-        textContent.innerText = "BANANA"
+        recognition.start();
+        console.log("Recognition started");
+
     }
 
     function stopButton() {
-        const startButton = document.getElementById("start");
         const textContent = document.getElementById("textContent");
-        textContent.innerText = "BANANA"
+        recognition.stop();
+
+        console.log("Recognition stopped");
+    }
+
+    function clearButton() {
+        const textContent = document.getElementById("textContent");
+        textContent.innerText = '';
+
+        console.log("cleared");
+    }
+
+    recognition.onresult = (e) => {
+        console.log(e);
+        const textContent = document.getElementById("textContent");
+        textContent.innerText += e.results[e.results.length - 1][0].transcript;
     }
 
     return <>
@@ -23,8 +40,10 @@ function Game() {
             
             <button id = 'start' className='p-3 border-amber-600 border-solid border-3 rounded-2xl' onClick={startButton}>Start</button>
             <button id='stop' className='p-3 border-amber-600 border-solid border-3 rounded-2xl' onClick={stopButton}>Stop</button>
+            <button id='clear' className='p-3 border-amber-600 border-solid border-3 rounded-2xl' onClick={clearButton}>Clear</button>
 
-            <p id='textContent'>Testing stuff here</p>
+
+            <div id='textContent'></div>
 
         </div>
 {/*         
